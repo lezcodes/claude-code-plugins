@@ -58,10 +58,11 @@ Directory structure created:
 
 ### From Marketplace
 
-If you're using a plugin marketplace that includes this plugin:
+Add the marketplace and install the plugin:
 
 ```bash
-claude-code plugin install research-design-implement
+/plugin marketplace add lezcodes/claude-code-plugins
+/plugin install rdi@lezcodes
 ```
 
 ### Manual Installation

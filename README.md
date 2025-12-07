@@ -27,7 +27,7 @@ A systematic workflow plugin that guides Claude through three structured phases 
 Install this marketplace directly from GitHub:
 
 ```bash
-claude-code plugin marketplace add https://github.com/carloselezamaj/claude-code-plugins
+/plugin marketplace add lezcodes/claude-code-plugins
 ```
 
 ### Install Individual Plugins
@@ -35,7 +35,7 @@ claude-code plugin marketplace add https://github.com/carloselezamaj/claude-code
 Once the marketplace is added, install specific plugins:
 
 ```bash
-claude-code plugin install research-design-implement
+/plugin install rdi@lezcodes
 ```
 
 ## Plugin Structure
@@ -63,7 +63,7 @@ claude-code-plugins/
 
 1. Install the plugin:
    ```bash
-   claude-code plugin install research-design-implement
+   /plugin install rdi@lezcodes
    ```
 
 2. Start the workflow:
