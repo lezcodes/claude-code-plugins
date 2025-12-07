@@ -1,0 +1,13 @@
+{
+  "name": "research-design-implement",
+  "version": "1.0.0",
+  "description": "A systematic workflow plugin that guides Claude through research, design, and implementation phases for code changes",
+  "author": {
+    "name": "Carlos Lezama",
+    "email": "carloselezamaj@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["workflow", "research", "design", "implementation", "development"],
+  "commands": "./commands/",
+  "agents": "./agents/"
+}

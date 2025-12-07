@@ -1,0 +1,28 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "carlos-lezama-plugins",
+  "owner": {
+    "name": "Carlos Lezama",
+    "email": "carloselezamaj@gmail.com"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for systematic development workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "research-design-implement",
+      "source": "./plugins/research-design-implement",
+      "description": "A systematic workflow plugin that guides Claude through research, design, and implementation phases for code changes. Ensures thorough understanding, careful planning, and verified implementation of complex features.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Carlos Lezama",
+        "email": "carloselezamaj@gmail.com"
+      },
+      "license": "Apache-2.0",
+      "keywords": ["workflow", "research", "design", "implementation", "development", "systematic"],
+      "tags": ["development", "workflow"],
+      "category": "productivity"
+    }
+  ]
+}
