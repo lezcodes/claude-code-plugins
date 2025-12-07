@@ -1,6 +1,6 @@
 ---
 description: Design detailed implementation plan from research findings
-model: opus
+model: claude-opus-4-5
 ---
 
 # Design Implementation Plan
@@ -208,38 +208,25 @@ Write to `${RESEARCH_DIR}/plan.md` (same directory as research.md):
 **Pause Point**: After automated verification passes, stop and wait for manual testing confirmation before proceeding to Phase 2.
 
 ---
-
 ## Phase 2: [Descriptive Name]
-
 ### Overview
 [What this phase accomplishes]
-
 ### Changes Required
-
 #### 1. [Component Name]
-
 **File**: `path/to/file.ext`
-
 **Current State**: [After Phase 1 changes]
-
 **Required Changes**: [Specific changes]
-
 ```[language]
 // Code changes for this phase
 ```
-
 ### Success Criteria
-
 #### Automated Verification
 - [ ] [Automated check 1]
 - [ ] [Automated check 2]
-
 #### Manual Verification
 - [ ] [Manual test 1]
 - [ ] [Manual test 2]
-
 **Pause Point**: Wait for manual testing confirmation before Phase 3.
-
 ---
 
 ## Phase 3: [Descriptive Name]
@@ -247,17 +234,12 @@ Write to `${RESEARCH_DIR}/plan.md` (same directory as research.md):
 [Similar structure...]
 
 ---
-
 ## Testing Strategy
-
 ### Unit Tests
-
 **New tests to write**:
-
 #### Test: [Test Name]
 **File**: `path/to/test.spec.ts`
 **Tests**: [What this test verifies]
-
 ```[language]
 // Example test structure based on pattern from research
 describe('[Feature]', () => {
@@ -266,110 +248,75 @@ describe('[Feature]', () => {
   });
 });
 ```
-
 **Edge cases to cover**:
 - [ ] [Edge case 1]
 - [ ] [Edge case 2]
 - [ ] [Edge case 3]
-
 ### Integration Tests
-
 **Scenarios to test**:
 1. [End-to-end scenario 1]
    - Steps: [Detailed steps]
    - Expected: [Expected outcome]
-
 2. [End-to-end scenario 2]
    - Steps: [Detailed steps]
    - Expected: [Expected outcome]
-
 ### Manual Testing Steps
-
 **Complete testing checklist**:
-
 1. **[Test scenario 1]**
    - [ ] Step 1: [Specific action]
    - [ ] Step 2: [Specific action]
    - [ ] Expected: [What should happen]
-
 2. **[Test scenario 2]**
    - [ ] Step 1: [Specific action]
    - [ ] Step 2: [Specific action]
    - [ ] Expected: [What should happen]
-
 3. **Edge Cases**
    - [ ] [Edge case 1 - how to test, expected behavior]
    - [ ] [Edge case 2 - how to test, expected behavior]
-
 ## Files to Modify
-
 **Summary of all file changes**:
-
 | File | Phase | Type of Change |
 |------|-------|----------------|
 | `path/to/file1.ts` | 1 | Modify existing function |
 | `path/to/file2.ts` | 1 | Add new component |
 | `path/to/test.spec.ts` | 2 | Add tests |
 | `path/to/file3.ts` | 3 | Update integration |
-
 ## Performance Considerations
-
 [Any performance implications based on research]
-
 - [Consideration 1]: [Impact and mitigation]
 - [Consideration 2]: [Impact and mitigation]
-
 ## Migration Notes
-
 [If applicable, how to handle existing data/systems/users]
-
 **Migration required**: [Yes/No]
-
 **Migration steps** (if applicable):
 1. [Step 1]
 2. [Step 2]
 3. [Rollback plan if needed]
-
 ## Rollback Plan
-
 **If something goes wrong**:
-
 1. [How to revert Phase 3]
 2. [How to revert Phase 2]
 3. [How to revert Phase 1]
-
 **Data safety**: [How to ensure no data loss]
-
 ## Risk Assessment
-
 **Potential risks identified**:
-
 | Risk | Likelihood | Impact | Mitigation |
 |------|------------|--------|------------|
 | [Risk 1] | High/Med/Low | High/Med/Low | [How to mitigate] |
 | [Risk 2] | High/Med/Low | High/Med/Low | [How to mitigate] |
-
 ## References
-
 **From research**:
 - Research document: `./research.md`
 - Key pattern: `file:line` - [Description]
 - Similar implementation: `file:line` - [Description]
-
 **External references**:
 - [Documentation link]
 - [Related issue/ticket]
-
 ## Open Questions
-
 [None - all questions must be resolved before plan is finalized]
-
 **If any questions remain, STOP and ask the user before completing the plan.**
-
 ## Implementation Checklist
-
 Before starting implementation with `/implement`:
-
 - [ ] All phases clearly defined
 - [ ] All file changes specified
 - [ ] All success criteria measurable
@@ -379,76 +326,58 @@ Before starting implementation with `/implement`:
 - [ ] No open questions
 - [ ] User approved the plan
 ```
-
 ### Step 6: Present Plan
-
 ```
 Implementation Plan Complete!
-
 I've created the detailed plan in:
 [research_dir]/plan.md
-
 **Plan Summary**:
 - Approach: [Chosen approach]
 - Phases: [Number] phases
 - Files to modify: [Count]
 - Estimated complexity: [High/Medium/Low]
-
 **Key phases**:
 1. [Phase 1 name] - [Brief description]
 2. [Phase 2 name] - [Brief description]
 3. [Phase 3 name] - [Brief description]
-
 Please review the plan. Once approved, use:
 /implement [research_dir]/plan.md
-
 Would you like me to explain any part of the plan in more detail?
 ```
-
 ### Step 7: Iterate if Needed
-
 If user requests changes:
 - Update the plan.md file
 - Address feedback
 - Re-present the plan
 - Continue until approved
-
 ## Important Guidelines
-
 ### File Location
 - **ALWAYS save plan.md** to the same directory as research.md
 - Extract directory path from research.md path
 - Maintain the directory structure: `.claude/thoughts/{epoch}_{name}/`
-
 ### Read Research Completely
 - **NEVER** use limit/offset when reading research.md
 - Extract ALL relevant information
 - Reference specific findings with file:line
 - Build on research, don't duplicate it
-
 ### No Open Questions
 - **STOP if you have questions** - ask the user
 - Don't write plan with placeholders
 - Every decision must be made
 - Plan must be 100% actionable
-
 ### Be Specific
 - Exact file paths for all changes
 - Specific commands for verification
 - Detailed manual testing steps
 - Clear success criteria
-
 ### Interactive Process
 - Present options before deciding
 - Get feedback on structure
 - Iterate until approved
 - Work collaboratively
-
 ### Track Progress
 - Use TodoWrite for planning tasks
 - Mark completed when plan is approved
 - Keep user informed
-
 The plan.md will be consumed by `/implement` to execute the implementation phase by phase.
-
 Note: This command is named `/design` to avoid conflicts with Claude Code's native `/plan` command.

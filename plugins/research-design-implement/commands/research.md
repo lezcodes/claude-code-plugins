@@ -1,6 +1,6 @@
 ---
 description: Research phase - explore and understand the codebase
-model: opus
+model: claude-opus-4-5
 ---
 
 # Codebase Research

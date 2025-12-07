@@ -1,6 +1,6 @@
 ---
 description: Research, Plan, and Implement workflow for systematic code changes
-model: opus
+model: claude-opus-4-5
 ---
 
 # Research-Plan-Implement Workflow
@@ -239,15 +239,12 @@ Artifacts:
 Suggested commit message:
 ---
 [Type]: [Brief description]
-
 Based on:
 - Research: .claude/thoughts/[epoch]_[name]/research.md
 - Plan: .claude/thoughts/[epoch]_[name]/plan.md
-
 Changes:
 - [Change 1]
 - [Change 2]
-
 All automated and manual verification passed.
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: Implementation phase - execute plan with verification
-model: opus
+model: claude-opus-4-5
 ---
 
 # Plan Implementation
@@ -221,16 +221,13 @@ Ready to commit? Here's a suggested commit message:
 
 ---
 [Feature/Fix]: [Brief description]
-
 Implemented based on research and plan:
 - Research: .claude/thoughts/[epoch]_[name]/research.md
 - Plan: .claude/thoughts/[epoch]_[name]/plan.md
-
 Changes:
 - [Change 1]
 - [Change 2]
 - [Change 3]
-
 All automated and manual verification passed.
 ---
 
