@@ -7,10 +7,7 @@
     "email": "carloselezamaj@gmail.com"
   },
   "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/lezcodes/claude-code-plugins"
-  },
+  "repository": "https://github.com/lezcodes/claude-code-plugins",
   "commands": [
     "./commands/rpi.md",
     "./commands/research.md",
