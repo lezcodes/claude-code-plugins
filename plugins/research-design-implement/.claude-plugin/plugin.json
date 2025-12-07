@@ -7,7 +7,26 @@
     "email": "carloselezamaj@gmail.com"
   },
   "license": "Apache-2.0",
-  "keywords": ["workflow", "research", "design", "implementation", "development"],
-  "commands": "./commands/",
-  "agents": "./agents/"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lezcodes/claude-code-plugins"
+  },
+  "commands": [
+    "./commands/rpi.md",
+    "./commands/research.md",
+    "./commands/design.md",
+    "./commands/implement.md"
+  ],
+  "agents": [
+    "./agents/codebase-locator.md",
+    "./agents/codebase-analyzer.md",
+    "./agents/codebase-pattern-finder.md"
+  ],
+  "keywords": [
+    "workflow",
+    "research",
+    "design",
+    "implementation",
+    "development"
+  ]
 }
