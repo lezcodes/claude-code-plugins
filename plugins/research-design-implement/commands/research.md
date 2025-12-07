@@ -28,46 +28,76 @@ Then wait for the user's research query and short name.
 
 1. **Get short name from user** for the research topic (e.g., "user_auth", "dark_mode", "api_refactor")
 
-2. **Create research directory using hook**:
+2. **Check for codebase context using hook**:
+   ```bash
+   # Check if current directory has a codebase
+   # This prevents searching across entire computer
+   HAS_CODEBASE=$(${CLAUDE_PLUGIN_ROOT}/hooks/check_codebase.sh)
+   ```
+
+   The hook checks for:
+   - Project files (package.json, Cargo.toml, go.mod, etc.)
+   - Source directories (src/, lib/, pkg/, etc.)
+   - Source code files (*.ts, *.js, *.py, *.go, *.rs, *.java, *.rb, *.php, *.c, *.cpp, and many more)
+
+3. **Create research directory using hook**:
    ```bash
    RESEARCH_DIR=$(${CLAUDE_PLUGIN_ROOT}/hooks/create_research_dir.sh "${SHORT_NAME}")
    ```
    This creates `.claude/thoughts/{epoch}_{short_name}/` and returns the path.
 
-3. **Read any mentioned files completely**:
+4. **Determine research mode**:
+   - If `HAS_CODEBASE="true"`: Proceed with codebase research (search ONLY in current working directory)
+   - If `HAS_CODEBASE="false"`: Use WebSearch for research instead of file searches
+   - NEVER search in parent directories or other locations on the computer
+
+5. **Read any mentioned files completely** (only if HAS_CODEBASE=true):
    - Use Read tool WITHOUT limit/offset parameters
    - Get full context before spawning sub-tasks
 
-4. **Create research plan** using TodoWrite:
+6. **Create research plan** using TodoWrite:
    - List areas to investigate
    - Track exploration progress
 
-5. **Spawn parallel research agents** using Task tool with `subagent_type="Explore"`:
+7. **Spawn parallel research agents** (only if HAS_CODEBASE=true) using Task tool with `subagent_type="Explore"`:
+
+   **CRITICAL: All searches must be restricted to current working directory only!**
 
    **Find WHERE files live**:
    ```
-   "Find all files related to [feature/component].
+   "Find all files related to [feature/component] in the current working directory only.
+   Do NOT search parent directories or other locations.
    Focus on: implementation files, tests, configuration, and type definitions.
    Return file paths grouped by purpose."
    ```
 
    **Understand HOW it works**:
    ```
-   "Analyze how [specific feature] is currently implemented.
+   "Analyze how [specific feature] is currently implemented in the current working directory.
+   Do NOT search parent directories or other locations.
    Trace the data flow, identify key functions, and document patterns.
    Include file:line references."
    ```
 
    **Discover PATTERNS to follow**:
    ```
-   "Find examples of similar features or patterns in the codebase.
+   "Find examples of similar features or patterns in the current working directory only.
+   Do NOT search parent directories or other locations.
    Look for: naming conventions, testing approaches, and integration patterns.
    Document what exists."
    ```
 
-6. **Wait for all agents to complete**
+7a. **Alternative: Web-based research** (only if HAS_CODEBASE=false):
 
-7. **Write research.md** to `${RESEARCH_DIR}/research.md`:
+   Use WebSearch tool to research the topic:
+   ```
+   "Research [topic]: best practices, implementation approaches, common patterns.
+   Look for: official documentation, tutorials, example implementations."
+   ```
+
+8. **Wait for all agents to complete**
+
+9. **Write research.md** to `${RESEARCH_DIR}/research.md`:
 
 ```markdown
 # Research: [Topic Name]
@@ -221,8 +251,9 @@ Based on this research, when planning new features or changes in this area:
 - [Link to similar implementations]
 ```
 
-8. **Present findings to user**:
+10. **Present findings to user**:
 
+**For codebase research (HAS_CODEBASE=true):**
 ```
 Research Complete!
 
@@ -237,18 +268,50 @@ Key Files:
 - `file2.ts:45` - [Brief description]
 
 Ready to design a plan based on this research?
-Use: /design .claude/thoughts/[epoch]_[short_name]/research.md
+Use: /rdi:design .claude/thoughts/[epoch]_[short_name]/research.md
+```
+
+**For web research (HAS_CODEBASE=false):**
+```
+Research Complete!
+
+I've documented my findings from web research in:
+.claude/thoughts/[epoch]_[short_name]/research.md
+
+Summary:
+[2-3 sentence summary of key findings from web]
+
+Key Resources:
+- [Resource 1] - [Brief description]
+- [Resource 2] - [Brief description]
+
+Ready to design a plan based on this research?
+Use: /rdi:design .claude/thoughts/[epoch]_[short_name]/research.md
 ```
 
 ## Important Guidelines
 
+- **ALWAYS check for codebase context first** using the bash check
+- **NEVER search outside current working directory** - this is critical!
 - **ALWAYS create the research directory** with epoch timestamp
 - **ALWAYS write research.md** to the directory
-- Use parallel Task agents for exploration
+- **Use parallel Task agents for codebase exploration** (only if HAS_CODEBASE=true)
+- **Use WebSearch for research** if no codebase exists (HAS_CODEBASE=false)
 - Read files completely (no limit/offset)
-- Include specific file:line references
+- Include specific file:line references for codebase research
 - Document patterns without critique
 - Wait for ALL agents before synthesizing
 - Present findings clearly with path to research.md
+- Explicitly tell agents to search ONLY in current working directory
 
-The research.md file will be consumed by the `/plan` command to create an implementation plan.
+## Search Scope Safety
+
+**CRITICAL**: To prevent searching across the entire computer:
+
+1. **Always check for codebase presence** before doing file searches
+2. **Only search in current working directory** when codebase exists
+3. **Never use parent directory references** (like `../`) in searches
+4. **Pass explicit instructions to agents** about search scope
+5. **Use WebSearch as fallback** when no local codebase exists
+
+The research.md file will be consumed by the `/rdi:design` command to create an implementation plan.
